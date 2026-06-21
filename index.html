@@ -159,6 +159,14 @@ img{max-width:100%}
 .card .ph .phimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 .ph.has-img::after{display:none}
 .modal-ph .mimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.badge.soon{background:#161616;color:var(--gold);border:1px solid var(--gold)}
+.ph.has-soon::after{display:none}
+.soon-ph{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:20px}
+.soon-ph b{font-family:var(--script);font-weight:400;font-size:62px;color:var(--gold);line-height:1}
+.soon-ph small{font-family:var(--cond);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.card.soon{cursor:default}
+.card.soon:hover{transform:none;border-color:var(--line);box-shadow:none}
+.soon-t{font-family:var(--cond);color:var(--gold);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
 @media(hover:none){.card .quick{transform:translateY(0)}.card .ph .quick{background:linear-gradient(180deg,transparent,rgba(0,0,0,.7))}}
 @media(max-width:720px){
 .tiger-mark{display:none}
@@ -245,21 +253,24 @@ header.hero{min-height:auto;padding:40px 0 54px}
 <button class="totop" id="totop" aria-label="Back to top">虎</button>
 <div class="toast" id="toast"></div>
 <script>
-var items=[{brand:"Sp5der",cat:"Hoodies",name:"Sp5der Hoodie",price:"$90",status:"SOLD",img:"piece-07.jpg"},{brand:"Jordan",cat:"Sneakers",name:"Air Jordan 4 Black Cat",price:"$100",status:"SOLD",img:"s100b.jpg"},{brand:"BAPE",cat:"Tees",name:"BAPE Big Ape Tee",price:"$90",status:"SOLD",img:"s90.jpg"},{brand:"Yeezy",cat:"Sneakers",name:"Yeezy Slides",price:"$100",status:"SOLD",img:"s100.jpg"},{brand:"BAPE × Stussy",cat:"Bundles",name:"BAPE × Stussy Bundle",price:"$145",status:"SOLD",img:"s145.jpg"},{brand:"Essentials",cat:"Hoodies",name:"Essentials Hoodie",price:"$60",status:"SOLD",img:"s60.jpg"},{brand:"Essentials",cat:"Hoodies",name:"Essentials Hoodie",price:"$60",status:"SOLD",img:"s60b.jpg"},{brand:"Stussy",cat:"Tees",name:"Stussy Dice Tee",price:"$45",status:"SOLD",img:"s45.jpg"},{brand:"Essentials",cat:"Bundles",name:"Essentials Bundle",price:"$120",status:"SOLD",img:"s120.jpg"}];
+var items=[{brand:"Sp5der",cat:"Hoodies",name:"Sp5der Hoodie",price:"$90",status:"SOLD",img:"piece-07.jpg"},{brand:"Jordan",cat:"Sneakers",name:"Air Jordan 4 Black Cat",price:"$100",status:"SOLD",img:"s100b.jpg"},{brand:"BAPE",cat:"Tees",name:"BAPE Big Ape Tee",price:"$90",status:"SOLD",img:"s90.jpg"},{brand:"Yeezy",cat:"Sneakers",name:"Yeezy Slides",price:"$100",status:"SOLD",img:"s100.jpg"},{brand:"BAPE × Stussy",cat:"Bundles",name:"BAPE × Stussy Bundle",price:"$145",status:"SOLD",img:"s145.jpg"},{brand:"Essentials",cat:"Hoodies",name:"Essentials Hoodie",price:"$60",status:"SOLD",img:"s60.jpg"},{brand:"Essentials",cat:"Hoodies",name:"Essentials Hoodie",price:"$60",status:"SOLD",img:"s60b.jpg"},{brand:"Stussy",cat:"Tees",name:"Stussy Dice Tee",price:"$45",status:"SOLD",img:"s45.jpg"},{brand:"Essentials",cat:"Bundles",name:"Essentials Bundle",price:"$120",status:"SOLD",img:"s120.jpg"},{brand:"Sp5der",cat:"Hoodies",name:"Sp5der Hoodie",soon:true},{brand:"BAPE",cat:"Tees",name:"BAPE Tee",soon:true},{brand:"Essentials",cat:"Hoodies",name:"Essentials Hoodie",soon:true},{brand:"Jordan",cat:"Sneakers",name:"Air Jordan",soon:true}];
 var dmLink="https://instagram.com/2foe.resells";
 var cardsEl=document.getElementById('cards');
 cardsEl.innerHTML=items.map(function(it,i){
 var sold=it.status==="SOLD";
-var bcl=sold?"sold":(it.status==="NEW"?"new":"");
-var badge=it.status?'<span class="badge '+bcl+'">'+it.status+'</span>':"";
-var price=it.price;
-var dm=sold?'<span class="ask">Sold</span>':'<span class="dm">DM to cop &rarr;</span>';
-var ph=it.img?'<img class="phimg" src="'+it.img+'" alt="'+it.name+'" loading="lazy">':'<span class="watermark">'+it.wm+'</span>';
-var phcls=it.img?'ph has-img':'ph';
-return '<div class="card reveal" data-i="'+i+'" data-cat="'+it.cat+'" data-status="'+it.status+'" style="transition-delay:'+(i*60)+'ms">'+
-'<div class="'+phcls+'">'+badge+ph+'<div class="quick">Quick view</div></div>'+
+var soon=it.soon===true;
+var bcl=soon?"soon":(sold?"sold":(it.status==="NEW"?"new":""));
+var btext=soon?"SOON":it.status;
+var badge=btext?'<span class="badge '+bcl+'">'+btext+'</span>':"";
+var dm=soon?'':(sold?'<span class="ask">Sold</span>':'<span class="dm">DM to cop &rarr;</span>');
+var priceHtml=soon?'<span class="soon-t">Restock coming soon</span>':'<span class="price">'+it.price+'</span>';
+var ph=it.img?'<img class="phimg" src="'+it.img+'" alt="'+it.name+'" loading="lazy">':(soon?'<span class="soon-ph"><b>虎</b><small>Restock coming soon</small></span>':'<span class="watermark">'+it.wm+'</span>');
+var phcls=it.img?'ph has-img':(soon?'ph has-soon':'ph');
+var quick=soon?'':'<div class="quick">Quick view</div>';
+return '<div class="'+(soon?'card soon reveal':'card reveal')+'" data-i="'+i+'" data-cat="'+it.cat+'" data-status="'+(it.status||'')+'" style="transition-delay:'+(i*60)+'ms">'+
+'<div class="'+phcls+'">'+badge+ph+quick+'</div>'+
 '<div class="body"><div class="brand-line">'+it.brand+'</div><div class="name">'+it.name+'</div>'+
-'<div class="meta"><span class="price">'+price+'</span>'+dm+'</div></div></div>';
+'<div class="meta">'+priceHtml+dm+'</div></div></div>';
 }).join('');
 
 // scroll reveal
@@ -280,7 +291,7 @@ document.querySelectorAll('.card').forEach(function(c){var show=f==='all'||c.get
 
 // modal
 var modal=document.getElementById('modal');
-cardsEl.addEventListener('click',function(e){var c=e.target.closest('.card');if(!c)return;var it=items[+c.getAttribute('data-i')];
+cardsEl.addEventListener('click',function(e){var c=e.target.closest('.card');if(!c)return;var it=items[+c.getAttribute('data-i')];if(it.soon){return;}
 document.getElementById('mwm').textContent=it.wm;document.getElementById('mbrand').textContent=it.brand;document.getElementById('mname').textContent=it.name;
 var mi=document.getElementById('mimg');if(it.img){mi.src=it.img;mi.style.display='block';document.getElementById('mwm').style.display='none';}else{mi.style.display='none';document.getElementById('mwm').style.display='';}
 var sold=it.status==="SOLD";document.getElementById('mprice').textContent=it.price+(sold?' · Sold':'');
