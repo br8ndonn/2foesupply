@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>THE PLUG — Designer Resale</title>
+<title>2FOESUPPLY — Designer Resale</title>
 <meta name="description" content="Designer resale at wholesale prices. Real pieces, no markup games. Find us at the swap meet or DM direct." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Pinyon+Script&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0a;--bg-2:#101010;--washed:#141414;--ink:#fafafa;--muted:#7d7d7d;--line:#262626;--display:"Anton",Impact,"Arial Black",sans-serif;--script:"Pinyon Script","Brush Script MT",cursive;--cond:"Oswald","Arial Narrow",sans-serif}
+:root{--bg:#0a0a0a;--bg-2:#101010;--washed:#141414;--ink:#fafafa;--muted:#7d7d7d;--line:#262626;--gold:#c9a14a;--display:"Anton",Impact,"Arial Black",sans-serif;--script:"Pinyon Script","Brush Script MT",cursive;--cond:"Oswald","Arial Narrow",sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
@@ -23,56 +23,81 @@ nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.85);backdrop-filt
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
 .brand{font-family:var(--cond);font-weight:700;letter-spacing:.28em;font-size:17px;text-transform:uppercase}
 .brand span{opacity:.5;font-weight:400}
-.nav-links{display:flex;gap:30px}
+.nav-links{display:flex;gap:30px;align-items:center}
 .nav-links a{font-family:var(--cond);font-weight:500;color:var(--muted);text-decoration:none;font-size:14px;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
 .nav-cta{color:var(--bg)!important;background:var(--ink);padding:9px 16px;border-radius:2px;font-weight:700}
 .nav-cta:hover{opacity:.85}
-@media(max-width:720px){.nav-links{display:none}}
+.hamb{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px}
+.hamb span{width:24px;height:2px;background:var(--ink);transition:.25s}
+.hamb.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamb.open span:nth-child(2){opacity:0}
+.hamb.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:720px){
+.hamb{display:flex}
+.nav-links{position:fixed;inset:64px 0 auto 0;flex-direction:column;align-items:flex-start;gap:0;background:rgba(10,10,10,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:8px 24px 20px;transform:translateY(-130%);transition:transform .32s cubic-bezier(.2,.7,.2,1);z-index:49}
+.nav-links.show{transform:translateY(0)}
+.nav-links a{padding:16px 0;font-size:18px;width:100%;border-bottom:1px solid var(--line)}
+.nav-cta{margin-top:12px}
+}
 header.hero{min-height:90vh;display:flex;align-items:center;background:radial-gradient(ellipse at 70% 30%,rgba(255,255,255,.05),transparent 55%),linear-gradient(180deg,#0c0c0c,#060606);border-bottom:1px solid var(--line);position:relative}
 .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;width:100%}
+.yot{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--gold);color:var(--gold);font-family:var(--cond);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:7px 14px;border-radius:2px;margin-bottom:20px}
+.yot .glyph{font-size:15px;line-height:1}
+.yot .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
 .eyebrow{color:var(--muted);letter-spacing:.4em;font-size:11px;text-transform:uppercase;margin-bottom:22px}
 h1.hero-title{font-family:var(--display);font-size:clamp(54px,10vw,120px);line-height:.86;font-weight:400;letter-spacing:.005em;text-transform:uppercase}
 h1.hero-title em{font-family:var(--script);font-style:normal;display:block;text-transform:none;font-weight:400;font-size:clamp(72px,15vw,180px);line-height:.8;letter-spacing:0;margin:6px 0 2px -2px;color:var(--ink)}
 h1.hero-title b{display:block;font-weight:400;font-size:clamp(20px,3.4vw,40px);letter-spacing:.04em;color:#6f6f6f}
 .hero-sub{margin-top:26px;max-width:440px;color:#c7c2b8;font-size:16px}
 .hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
-.btn{font-family:var(--cond);display:inline-block;text-decoration:none;font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:14px 24px;border-radius:2px;transition:all .2s}
+.btn{font-family:var(--cond);display:inline-block;text-decoration:none;font-size:14px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:14px 24px;border-radius:2px;transition:all .2s;cursor:pointer;border:0}
 .btn-solid{background:var(--ink);color:var(--bg)}
 .btn-solid:hover{transform:translateY(-2px)}
-.btn-ghost{border:1px solid var(--line);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--ink)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);background:none}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .hero-tag{aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;padding:0;position:relative;overflow:visible}
-.hero-tag .tiger-img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:118%;max-width:none;filter:invert(1) drop-shadow(0 30px 60px rgba(0,0,0,.6));pointer-events:none}
+.hero-tag .tiger-img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:118%;max-width:none;filter:invert(1) drop-shadow(0 30px 60px rgba(0,0,0,.6));pointer-events:none;will-change:transform}
 .hero-tag::before{content:"Blessed";position:absolute;bottom:8%;left:-6%;transform:rotate(-8deg);font-family:var(--script);z-index:2;font-size:clamp(54px,9vw,104px);font-weight:400;letter-spacing:0;color:var(--ink);white-space:nowrap;text-shadow:0 2px 18px rgba(0,0,0,.8)}
 @media(max-width:820px){.hero-grid{grid-template-columns:1fr}.hero-tag{aspect-ratio:auto;height:340px;margin-top:10px;order:-1}.hero-tag .tiger-img{width:auto;height:118%}}
-.marquee{border-bottom:1px solid var(--line);background:var(--bg-2);overflow:hidden;white-space:nowrap}
-.marquee-track{display:inline-block;padding:14px 0;animation:scroll 22s linear infinite}
-.marquee-track span{color:var(--muted);letter-spacing:.3em;font-size:12px;text-transform:uppercase;margin:0 28px}
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-2);overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-block;padding:14px 0;animation:scroll 24s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{color:var(--muted);letter-spacing:.3em;font-size:12px;text-transform:uppercase;margin:0 26px}
 .marquee-track span b{color:var(--ink)}
+.marquee-track span.g{color:var(--gold)}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 section{padding:90px 0;position:relative;z-index:1}
-.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:42px;flex-wrap:wrap;gap:12px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:34px;flex-wrap:wrap;gap:12px}
 .sec-head h2{font-family:var(--display);font-size:clamp(34px,5.5vw,56px);font-weight:400;letter-spacing:.02em;text-transform:uppercase;line-height:1.05}
 .sec-head .count{color:var(--muted);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.filt{font-family:var(--cond);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--line);padding:9px 17px;border-radius:2px;cursor:pointer;transition:all .2s}
+.filt:hover{color:var(--ink);border-color:var(--ink)}
+.filt.active{color:#0a0a0a;background:var(--gold);border-color:var(--gold);font-weight:600}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.grid{grid-template-columns:1fr}}
-.card{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--washed);transition:border-color .2s,transform .2s;display:flex;flex-direction:column}
-.card:hover{border-color:#454545;transform:translateY(-3px)}
-.card .ph{aspect-ratio:4/5;position:relative;background:linear-gradient(135deg,#191919,#0e0e0e);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
+.card{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--washed);transition:border-color .25s,transform .25s,box-shadow .25s,opacity .3s;display:flex;flex-direction:column;cursor:pointer}
+.card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.card.hide{display:none}
+.card .ph{aspect-ratio:4/5;position:relative;background:linear-gradient(135deg,#191919,#0e0e0e);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);overflow:hidden}
 .card .ph::after{content:"DROP PHOTO";position:absolute;color:#2c2c2c;font-size:11px;letter-spacing:.3em;font-weight:700}
-.card .ph .watermark{font-size:46px;font-weight:800;color:#171717;-webkit-text-stroke:1px #262626;letter-spacing:-.03em}
+.card .ph .watermark{font-size:46px;font-weight:800;color:#171717;-webkit-text-stroke:1px #262626;letter-spacing:-.03em;transition:transform .4s}
+.card:hover .ph .watermark{transform:scale(1.08)}
+.card .ph .quick{position:absolute;inset:auto 0 0 0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.8));color:var(--gold);font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:11px;text-align:center;padding:14px 0 12px;transform:translateY(100%);transition:transform .3s;z-index:3}
+.card:hover .ph .quick{transform:translateY(0)}
 .badge{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--bg);font-size:9px;font-weight:800;letter-spacing:.15em;padding:5px 9px;border-radius:2px;text-transform:uppercase;z-index:2}
 .badge.sold{background:#3a1414;color:#ff8b8b}
+.badge.new{background:var(--gold);color:#0a0a0a}
 .card .body{padding:16px 16px 18px}
 .card .brand-line{font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
 .card .name{font-weight:700;font-size:16px;margin:6px 0 10px}
 .card .meta{display:flex;align-items:center;justify-content:space-between}
 .card .price{font-weight:800;font-size:15px;letter-spacing:.02em}
 .card .ask{color:var(--muted);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
-.card .dm{color:var(--ink);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .2s}
-.card .dm:hover{border-color:var(--ink)}
+.card .dm{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border-bottom:1px solid transparent;padding-bottom:2px}
 .about{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:32px}}
@@ -89,14 +114,16 @@ section{padding:90px 0;position:relative;z-index:1}
 .contact .lead{color:#c7c2b8;max-width:560px;margin-bottom:42px;font-size:16px}
 .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 @media(max-width:640px){.contact-grid{grid-template-columns:1fr}}
-.contact-card{border:1px solid var(--line);border-radius:3px;padding:26px;background:var(--washed);text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:18px;transition:all .2s}
-.contact-card:hover{border-color:var(--ink);transform:translateY(-2px)}
-.ci{width:46px;height:46px;flex-shrink:0;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center}
-.ci svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.6}
+.contact-card{border:1px solid var(--line);border-radius:3px;padding:26px;background:var(--washed);text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:18px;transition:all .2s;cursor:pointer}
+.contact-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.contact-card:hover .ci{border-color:var(--gold)}
+.contact-card:hover .ci svg{stroke:var(--gold)}
+.ci{width:46px;height:46px;flex-shrink:0;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
+.ci svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.6;transition:stroke .2s}
 .contact-card small{display:block;color:var(--muted);font-size:10px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:4px}
 .contact-card b{font-size:17px;letter-spacing:.01em}
 .swap{margin-top:18px;border:1px solid var(--line);border-radius:3px;padding:30px;background:var(--bg-2);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.swap .info small{color:var(--muted);font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+.swap .info small{color:var(--gold);font-size:10px;letter-spacing:.22em;text-transform:uppercase}
 .swap .info b{display:block;font-size:22px;margin:6px 0 4px;letter-spacing:.01em}
 .swap .info span{color:#c7c2b8;font-size:14px}
 footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;position:relative}
@@ -104,66 +131,162 @@ footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;positio
 footer .brand{font-size:18px;margin-bottom:10px}
 footer p{color:var(--muted);font-size:12px;letter-spacing:.08em}
 footer .note{margin-top:14px;color:#5a564f;font-size:11px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(5,5,5,.82);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .25s}
+.modal.open{opacity:1;visibility:visible}
+.modal-card{width:min(760px,100%);background:var(--bg-2);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;transform:translateY(16px) scale(.98);transition:transform .3s}
+.modal.open .modal-card{transform:none}
+@media(max-width:620px){.modal-card{grid-template-columns:1fr}}
+.modal-ph{aspect-ratio:4/5;background:linear-gradient(135deg,#191919,#0e0e0e);display:flex;align-items:center;justify-content:center;position:relative;border-right:1px solid var(--line)}
+.modal-ph .watermark{font-size:74px;font-weight:800;color:#1b1b1b;-webkit-text-stroke:1px #2c2c2c;font-family:var(--display)}
+.modal-body{padding:30px;display:flex;flex-direction:column;justify-content:center}
+.modal-body .brand-line{font-size:10px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+.modal-body h3{font-family:var(--display);font-weight:400;font-size:34px;text-transform:uppercase;letter-spacing:.02em;margin:8px 0 4px}
+.modal-body .price{font-size:24px;font-weight:800;margin:10px 0 18px}
+.modal-body p{color:#c7c2b8;font-size:14px;margin-bottom:22px}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:0;color:var(--ink);font-size:26px;cursor:pointer;line-height:1;z-index:3;opacity:.7}
+.modal-close:hover{opacity:1;color:var(--gold)}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#0a0a0a;font-family:var(--cond);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:12px;padding:12px 22px;border-radius:3px;z-index:120;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.totop{position:fixed;right:24px;bottom:24px;width:50px;height:50px;border-radius:50%;border:1px solid var(--gold);background:rgba(10,10,10,.85);color:var(--gold);font-size:20px;cursor:pointer;z-index:80;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(6px)}
+.totop.show{opacity:1;visibility:visible}
+.totop:hover{background:var(--gold);color:#0a0a0a}
 </style>
 </head>
 <body>
 <nav><div class="wrap nav-inner">
-<div class="brand">THE&nbsp;PLUG <span>/ resale</span></div>
-<div class="nav-links"><a href="#shop">The Rack</a><a href="#about">Story</a><a href="#find">Find Us</a><a href="#find" class="nav-cta">DM to cop</a></div>
+<div class="brand">2FOESUPPLY <span>/ resale</span></div>
+<button class="hamb" id="hamb" aria-label="Menu"><span></span><span></span><span></span></button>
+<div class="nav-links" id="navlinks"><a href="#shop">The Rack</a><a href="#about">Story</a><a href="#find">Find Us</a><a href="#find" class="nav-cta">DM to cop</a></div>
 </div></nav>
 <header class="hero"><div class="wrap hero-grid">
 <div>
-<div class="eyebrow">Designer resale · wholesale prices</div>
-<h1 class="hero-title">Stay<em>Blessed</em><b>Dress Like It</b></h1>
-<p class="hero-sub">Designer and branded fits pulled straight from wholesale and passed to you. No checkout runaround — see what's on the rack, then pull up or DM direct.</p>
-<div class="hero-actions"><a href="#shop" class="btn btn-solid">See the rack</a><a href="#find" class="btn btn-ghost">Where to find us</a></div>
+<div class="yot reveal"><span class="dot"></span><span class="glyph">虎</span> Year of the Tiger Drop</div>
+<h1 class="hero-title reveal">Stay<em>Blessed</em><b>Dress Like It</b></h1>
+<p class="hero-sub reveal">Designer and branded fits pulled straight from wholesale and passed to you. No checkout runaround — see what's on the rack, then pull up or DM direct.</p>
+<div class="hero-actions reveal"><a href="#shop" class="btn btn-solid">See the rack</a><a href="#find" class="btn btn-ghost">Where to find us</a></div>
 </div>
-<div class="hero-tag"><img class="tiger-img" src="tiger.png" alt="Tiger graphic" /></div>
+<div class="hero-tag"><img class="tiger-img" id="heroTiger" src="tiger.png" alt="Tiger graphic" /></div>
 </div></header>
 <div class="marquee"><div class="marquee-track">
-<span>Designer <b>resale</b></span><span>Wholesale <b>prices</b></span><span>Swap meet <b>every weekend</b></span><span>DM <b>direct</b></span><span>New drops <b>weekly</b></span><span>Designer <b>resale</b></span><span>Wholesale <b>prices</b></span><span>Swap meet <b>every weekend</b></span><span>DM <b>direct</b></span><span>New drops <b>weekly</b></span>
+<span class="g">虎 Year of the Tiger</span><span>Designer <b>resale</b></span><span>Wholesale <b>prices</b></span><span>Swap meet <b>every weekend</b></span><span>DM <b>direct</b></span><span class="g">虎 Year of the Tiger</span><span>Designer <b>resale</b></span><span>Wholesale <b>prices</b></span><span>Swap meet <b>every weekend</b></span><span>DM <b>direct</b></span>
 </div></div>
 <section id="shop"><div class="tiger-mark r"></div><div class="wrap">
-<div class="sec-head"><h2>The Rack</h2><div class="count">Swap photos · update weekly</div></div>
+<div class="sec-head reveal"><h2>The Rack</h2><div class="count">Swap photos · update weekly</div></div>
+<div class="filters reveal" id="filters">
+<button class="filt active" data-f="all">All</button>
+<button class="filt" data-f="Designer">Designer</button>
+<button class="filt" data-f="Branded">Branded</button>
+<button class="filt" data-f="NEW">New In</button>
+<button class="filt" data-f="SOLD">Sold</button>
+</div>
 <div class="grid" id="cards"></div>
 </div></section>
 <section class="about" id="about"><div class="wrap about-grid">
-<div>
+<div class="reveal">
 <div class="eyebrow">The story</div>
 <h2>Bought right.<br><span class="s">Priced fair.</span></h2>
 <p>Started flipping designer pieces at the swap meet — real product, wholesale connect, prices that don't insult you. This page is the rack between meets: see what's in, then pull up or hit the DM. No bots, no checkout maze. You talk to the person who sourced it.</p>
-<div class="stats"><div class="stat"><b>$400</b><small>First weekend</small></div><div class="stat"><b>Weekly</b><small>New drops</small></div><div class="stat"><b>Direct</b><small>No middleman</small></div></div>
+<div class="stats">
+<div class="stat"><b data-count="400" data-prefix="$">$0</b><small>First weekend</small></div>
+<div class="stat"><b>Weekly</b><small>New drops</small></div>
+<div class="stat"><b>Direct</b><small>No middleman</small></div>
 </div>
-<div class="about-visual"><span>Blessed</span></div>
+</div>
+<div class="about-visual reveal"><span>Blessed</span></div>
 </div></section>
 <section class="contact" id="find"><div class="tiger-mark l"></div><div class="wrap">
-<div class="eyebrow">Pull up · reach out</div>
-<h2>Find Us</h2>
-<p class="lead">Want a piece or sizing? Hit whatever's easiest. Fastest reply is the DM.</p>
+<div class="eyebrow reveal">Pull up · reach out</div>
+<h2 class="reveal">Find Us</h2>
+<p class="lead reveal">Want a piece or sizing? Hit whatever's easiest. Fastest reply is the DM.</p>
 <div class="contact-grid">
-<a class="contact-card" href="https://instagram.com/yourhandle" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span><span><small>Instagram — fastest</small><b>@yourhandle</b></span></a>
-<a class="contact-card" href="sms:+15551234567"><span class="ci"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span><span><small>Text me</small><b>(555) 123-4567</b></span></a>
-<a class="contact-card" href="tel:+15551234567"><span class="ci"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></span><span><small>Call</small><b>(555) 123-4567</b></span></a>
-<a class="contact-card" href="mailto:you@email.com"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><small>Email</small><b>you@email.com</b></span></a>
+<a class="contact-card reveal" href="https://instagram.com/2foe.resells" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span><span><small>Instagram — fastest</small><b>@2foe.resells</b></span></a>
+<div class="contact-card reveal" data-copy="619-673-6588"><span class="ci"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span><span><small>Text — tap to copy</small><b>619-673-6588</b></span></div>
+<div class="contact-card reveal" data-copy="619-673-6588"><span class="ci"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></span><span><small>Call — tap to copy</small><b>619-673-6588</b></span></div>
+<div class="contact-card reveal" data-copy="br8ndonn.le87@gmail.com"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><small>Email — tap to copy</small><b>br8ndonn.le87@gmail.com</b></span></div>
 </div>
-<div class="swap"><div class="info"><small>In person — every weekend</small><b>Swap Meet · Lot / Row</b><span>Sat &amp; Sun · 7am–2pm · look for the rack</span></div><a href="https://maps.google.com/?q=your+swap+meet" target="_blank" rel="noopener" class="btn btn-solid">Get directions</a></div>
+<div class="swap reveal"><div class="info"><small>In person — every weekend</small><b>Swap Meet · Lot / Row</b><span>Sat &amp; Sun · 7am–2pm · look for the rack</span></div><a href="https://maps.google.com/?q=your+swap+meet" target="_blank" rel="noopener" class="btn btn-solid">Get directions</a></div>
 </div></section>
 <footer><div class="wrap">
 <img src="tiger.png" class="footer-tiger" alt="" />
-<div class="brand">THE&nbsp;PLUG</div>
+<div class="brand">2FOESUPPLY</div>
 <p>Designer resale · wholesale prices · DM to cop</p>
 <p class="note">Placeholder text &amp; contacts — swap the @handle, number, email, and swap-meet location for the real ones.</p>
 </div></footer>
+<div class="modal" id="modal"><div class="modal-card">
+<div class="modal-ph"><button class="modal-close" id="mclose">&times;</button><span class="watermark" id="mwm">01</span></div>
+<div class="modal-body"><div class="brand-line" id="mbrand">Designer</div><h3 id="mname">Piece</h3><div class="price" id="mprice">$00</div><p id="mdesc">One-of-one pull from the latest run. DM to lock it in or ask for more photos and sizing before you pull up.</p><a class="btn btn-solid" id="mdm" href="https://instagram.com/2foe.resells" target="_blank" rel="noopener">DM to cop</a></div>
+</div></div>
+<button class="totop" id="totop" aria-label="Back to top">虎</button>
+<div class="toast" id="toast"></div>
 <script>
 var items=[{brand:"Designer",name:"Piece 01",price:"$65",wm:"01",status:""},{brand:"Branded",name:"Piece 02",price:"$45",wm:"02",status:"NEW"},{brand:"Designer",name:"Piece 03",price:"$80",wm:"03",status:""},{brand:"Branded",name:"Piece 04",price:"$55",wm:"04",status:""},{brand:"Designer",name:"Piece 05",price:"$70",wm:"05",status:"SOLD"},{brand:"Branded",name:"Piece 06",price:"$40",wm:"06",status:"NEW"}];
-var dmLink="https://instagram.com/yourhandle";
-document.getElementById('cards').innerHTML=items.map(function(it){
+var dmLink="https://instagram.com/2foe.resells";
+var cardsEl=document.getElementById('cards');
+cardsEl.innerHTML=items.map(function(it,i){
 var sold=it.status==="SOLD";
-var badge=it.status?'<span class="badge '+(sold?'sold':'')+'">'+it.status+'</span>':"";
+var bcl=sold?"sold":(it.status==="NEW"?"new":"");
+var badge=it.status?'<span class="badge '+bcl+'">'+it.status+'</span>':"";
 var price=sold?'<span class="ask">Sold</span>':it.price;
-var dm=sold?'':'<a class="dm" href="'+dmLink+'" target="_blank" rel="noopener">DM to cop &rarr;</a>';
-return '<div class="card"><div class="ph">'+badge+'<span class="watermark">'+it.wm+'</span></div><div class="body"><div class="brand-line">'+it.brand+'</div><div class="name">'+it.name+'</div><div class="meta"><span class="price">'+price+'</span>'+dm+'</div></div></div>';
+var dm=sold?'<span class="ask">Sold</span>':'<span class="dm">DM to cop &rarr;</span>';
+return '<div class="card reveal" data-i="'+i+'" data-cat="'+it.brand+'" data-status="'+it.status+'" style="transition-delay:'+(i*60)+'ms">'+
+'<div class="ph">'+badge+'<span class="watermark">'+it.wm+'</span><div class="quick">Quick view</div></div>'+
+'<div class="body"><div class="brand-line">'+it.brand+'</div><div class="name">'+it.name+'</div>'+
+'<div class="meta"><span class="price">'+price+'</span>'+dm+'</div></div></div>';
 }).join('');
+
+// scroll reveal
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+// stat count-up
+function countUp(el){var t=+el.getAttribute('data-count'),pre=el.getAttribute('data-prefix')||'',d=1100,s=performance.now();
+function step(n){var p=Math.min((n-s)/d,1);var ev=1-Math.pow(1-p,3);el.textContent=pre+Math.round(t*ev);if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+var sio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);sio.unobserve(e.target);}});},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(function(el){sio.observe(el);});
+
+// filters
+document.getElementById('filters').addEventListener('click',function(e){var b=e.target.closest('.filt');if(!b)return;
+document.querySelectorAll('.filt').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
+var f=b.getAttribute('data-f');
+document.querySelectorAll('.card').forEach(function(c){var show=f==='all'||c.getAttribute('data-cat')===f||c.getAttribute('data-status')===f;c.classList.toggle('hide',!show);});});
+
+// modal
+var modal=document.getElementById('modal');
+cardsEl.addEventListener('click',function(e){var c=e.target.closest('.card');if(!c)return;var it=items[+c.getAttribute('data-i')];
+document.getElementById('mwm').textContent=it.wm;document.getElementById('mbrand').textContent=it.brand;document.getElementById('mname').textContent=it.name;
+var sold=it.status==="SOLD";document.getElementById('mprice').textContent=sold?'Sold':it.price;
+var dmb=document.getElementById('mdm');dmb.textContent=sold?'Ask about restock':'DM to cop';
+modal.classList.add('open');});
+function closeModal(){modal.classList.remove('open');}
+document.getElementById('mclose').addEventListener('click',closeModal);
+modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+// copy to clipboard + toast
+var toast=document.getElementById('toast'),tt;
+function showToast(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('show');},1900);}
+document.querySelectorAll('[data-copy]').forEach(function(el){el.addEventListener('click',function(){var v=el.getAttribute('data-copy');
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).then(function(){showToast('Copied · '+v);},function(){showToast(v);});}else{showToast(v);}});});
+
+// mobile menu
+var hamb=document.getElementById('hamb'),nl=document.getElementById('navlinks');
+hamb.addEventListener('click',function(){hamb.classList.toggle('open');nl.classList.toggle('show');});
+nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){hamb.classList.remove('open');nl.classList.remove('show');});});
+
+// back to top
+var totop=document.getElementById('totop');
+window.addEventListener('scroll',function(){totop.classList.toggle('show',window.scrollY>600);},{passive:true});
+totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+// living hero tiger: mouse parallax + idle breathing
+var tiger=document.getElementById('heroTiger'),tx=0,ty=0,cx=0,cy=0,base=window.matchMedia('(max-width:820px)').matches;
+window.addEventListener('mousemove',function(e){var w=window.innerWidth,h=window.innerHeight;tx=((e.clientX/w)-.5)*26;ty=((e.clientY/h)-.5)*18;},{passive:true});
+function loop(t){cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;var fy=Math.sin(t/1400)*6,rot=Math.sin(t/1600)*1.1;
+tiger.style.transform='translate(calc(-50% + '+cx.toFixed(2)+'px), calc(-50% + '+(cy+fy).toFixed(2)+'px)) rotate('+rot.toFixed(2)+'deg)';
+requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
 </script>
 </body>
 </html>
