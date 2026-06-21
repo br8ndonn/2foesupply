@@ -156,6 +156,9 @@ footer .note{margin-top:14px;color:#5a564f;font-size:11px}
 *{-webkit-tap-highlight-color:transparent}
 img{max-width:100%}
 .modal-card{max-height:90vh;overflow:auto}
+.card .ph .phimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.ph.has-img::after{display:none}
+.modal-ph .mimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
 @media(hover:none){.card .quick{transform:translateY(0)}.card .ph .quick{background:linear-gradient(180deg,transparent,rgba(0,0,0,.7))}}
 @media(max-width:720px){
 .tiger-mark{display:none}
@@ -195,13 +198,13 @@ header.hero{min-height:auto;padding:40px 0 54px}
 <span class="g">虎 Year of the Tiger</span><span>Designer <b>resale</b></span><span>Wholesale <b>prices</b></span><span>Swap meet <b>every weekend</b></span><span>DM <b>direct</b></span><span class="g">虎 Year of the Tiger</span><span>Designer <b>resale</b></span><span>Wholesale <b>prices</b></span><span>Swap meet <b>every weekend</b></span><span>DM <b>direct</b></span>
 </div></div>
 <section id="shop"><div class="tiger-mark r"></div><div class="wrap">
-<div class="sec-head reveal"><h2>The Rack</h2><div class="count">Swap photos · update weekly</div></div>
+<div class="sec-head reveal"><h2>The Rack</h2><div class="count">Recently moved · DM for similar</div></div>
 <div class="filters reveal" id="filters">
 <button class="filt active" data-f="all">All</button>
-<button class="filt" data-f="Designer">Designer</button>
-<button class="filt" data-f="Branded">Branded</button>
-<button class="filt" data-f="NEW">New In</button>
-<button class="filt" data-f="SOLD">Sold</button>
+<button class="filt" data-f="Hoodies">Hoodies</button>
+<button class="filt" data-f="Tees">Tees</button>
+<button class="filt" data-f="Sneakers">Sneakers</button>
+<button class="filt" data-f="Bundles">Bundles</button>
 </div>
 <div class="grid" id="cards"></div>
 </div></section>
@@ -236,23 +239,25 @@ header.hero{min-height:auto;padding:40px 0 54px}
 <p>Designer resale · wholesale prices · DM to cop</p>
 </div></footer>
 <div class="modal" id="modal"><div class="modal-card">
-<div class="modal-ph"><button class="modal-close" id="mclose">&times;</button><span class="watermark" id="mwm">01</span></div>
+<div class="modal-ph"><button class="modal-close" id="mclose">&times;</button><img id="mimg" class="mimg" alt="" /><span class="watermark" id="mwm">01</span></div>
 <div class="modal-body"><div class="brand-line" id="mbrand">Designer</div><h3 id="mname">Piece</h3><div class="price" id="mprice">$00</div><p id="mdesc">One-of-one pull from the latest run. DM to lock it in or ask for more photos and sizing before you pull up.</p><a class="btn btn-solid" id="mdm" href="https://instagram.com/2foe.resells" target="_blank" rel="noopener">DM to cop</a></div>
 </div></div>
 <button class="totop" id="totop" aria-label="Back to top">虎</button>
 <div class="toast" id="toast"></div>
 <script>
-var items=[{brand:"Designer",name:"Piece 01",price:"$65",wm:"01",status:""},{brand:"Branded",name:"Piece 02",price:"$45",wm:"02",status:"NEW"},{brand:"Designer",name:"Piece 03",price:"$80",wm:"03",status:""},{brand:"Branded",name:"Piece 04",price:"$55",wm:"04",status:""},{brand:"Designer",name:"Piece 05",price:"$70",wm:"05",status:"SOLD"},{brand:"Branded",name:"Piece 06",price:"$40",wm:"06",status:"NEW"}];
+var items=[{brand:"Sp5der",cat:"Hoodies",name:"Sp5der Hoodie",price:"$90",status:"SOLD",img:"piece-07.jpg"},{brand:"Jordan",cat:"Sneakers",name:"Air Jordan 4 Black Cat",price:"$100",status:"SOLD",img:"s100b.jpg"},{brand:"BAPE",cat:"Tees",name:"BAPE Big Ape Tee",price:"$90",status:"SOLD",img:"s90.jpg"},{brand:"Yeezy",cat:"Sneakers",name:"Yeezy Slides",price:"$100",status:"SOLD",img:"s100.jpg"},{brand:"BAPE × Stussy",cat:"Bundles",name:"BAPE × Stussy Bundle",price:"$145",status:"SOLD",img:"s145.jpg"},{brand:"Essentials",cat:"Hoodies",name:"Essentials Hoodie",price:"$60",status:"SOLD",img:"s60.jpg"},{brand:"Essentials",cat:"Hoodies",name:"Essentials Hoodie",price:"$60",status:"SOLD",img:"s60b.jpg"},{brand:"Stussy",cat:"Tees",name:"Stussy Dice Tee",price:"$45",status:"SOLD",img:"s45.jpg"},{brand:"Essentials",cat:"Bundles",name:"Essentials Bundle",price:"$120",status:"SOLD",img:"s120.jpg"}];
 var dmLink="https://instagram.com/2foe.resells";
 var cardsEl=document.getElementById('cards');
 cardsEl.innerHTML=items.map(function(it,i){
 var sold=it.status==="SOLD";
 var bcl=sold?"sold":(it.status==="NEW"?"new":"");
 var badge=it.status?'<span class="badge '+bcl+'">'+it.status+'</span>':"";
-var price=sold?'<span class="ask">Sold</span>':it.price;
+var price=it.price;
 var dm=sold?'<span class="ask">Sold</span>':'<span class="dm">DM to cop &rarr;</span>';
-return '<div class="card reveal" data-i="'+i+'" data-cat="'+it.brand+'" data-status="'+it.status+'" style="transition-delay:'+(i*60)+'ms">'+
-'<div class="ph">'+badge+'<span class="watermark">'+it.wm+'</span><div class="quick">Quick view</div></div>'+
+var ph=it.img?'<img class="phimg" src="'+it.img+'" alt="'+it.name+'" loading="lazy">':'<span class="watermark">'+it.wm+'</span>';
+var phcls=it.img?'ph has-img':'ph';
+return '<div class="card reveal" data-i="'+i+'" data-cat="'+it.cat+'" data-status="'+it.status+'" style="transition-delay:'+(i*60)+'ms">'+
+'<div class="'+phcls+'">'+badge+ph+'<div class="quick">Quick view</div></div>'+
 '<div class="body"><div class="brand-line">'+it.brand+'</div><div class="name">'+it.name+'</div>'+
 '<div class="meta"><span class="price">'+price+'</span>'+dm+'</div></div></div>';
 }).join('');
@@ -277,8 +282,9 @@ document.querySelectorAll('.card').forEach(function(c){var show=f==='all'||c.get
 var modal=document.getElementById('modal');
 cardsEl.addEventListener('click',function(e){var c=e.target.closest('.card');if(!c)return;var it=items[+c.getAttribute('data-i')];
 document.getElementById('mwm').textContent=it.wm;document.getElementById('mbrand').textContent=it.brand;document.getElementById('mname').textContent=it.name;
-var sold=it.status==="SOLD";document.getElementById('mprice').textContent=sold?'Sold':it.price;
-var dmb=document.getElementById('mdm');dmb.textContent=sold?'Ask about restock':'DM to cop';
+var mi=document.getElementById('mimg');if(it.img){mi.src=it.img;mi.style.display='block';document.getElementById('mwm').style.display='none';}else{mi.style.display='none';document.getElementById('mwm').style.display='';}
+var sold=it.status==="SOLD";document.getElementById('mprice').textContent=it.price+(sold?' · Sold':'');
+var dmb=document.getElementById('mdm');dmb.textContent=sold?'Ask about restock':'DM to cop';document.getElementById('mdesc').textContent=sold?"This one's gone — DM to ask about a restock or something similar in your size.":"One-of-one pull from the latest run. DM to lock it in or ask for sizing.";
 modal.classList.add('open');});
 function closeModal(){modal.classList.remove('open');}
 document.getElementById('mclose').addEventListener('click',closeModal);
